@@ -1,4 +1,4 @@
-# Image Viewer for M5Stack Series
+# M5Nafuda: M5Stack Digital Name Tag
 
 This program displays images stored on the LittleFS file system of the M5Stack series devices one after another.
 
