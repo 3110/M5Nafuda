@@ -1,6 +1,6 @@
 [In English](README_en_US.md)
 
-# M5Stackシリーズ用画像表示プログラム
+# M5Stackシリーズ用デジタル名札
 
 M5Stackシリーズでファイルシステム（LittleFS，microSD）上にある画像を次々と表示するプログラムです。
 
@@ -58,7 +58,7 @@ M5Stackシリーズでファイルシステム（LittleFS，microSD）上にあ�
 
 ## 設定ファイル
 
-設定ファイル`data/image-viewer.json`で以下を設定できます。
+設定ファイル`data/m5nafuda.json`で以下を設定できます。
 
 * `AutoMode`  
   自動表示モードのオン（`true`）・オフ（`false`）
@@ -102,16 +102,16 @@ M5Stackシリーズでファイルシステム（LittleFS，microSD）上にあ�
 
 ### microSDカードの場合
 
-設定ファイル（`image-viewer.json`）と表示する画像ファイル（PNG，JPEG，BMP）をmicroSDカードのルートディレクトリに置きます。使用するmicroSDカードの最大容量は16GBのものを用意し，FAT32でフォーマットしてください。
+設定ファイル（`m5nafuda.json`）と表示する画像ファイル（PNG，JPEG，BMP）をmicroSDカードのルートディレクトリに置きます。使用するmicroSDカードの最大容量は16GBのものを用意し，FAT32でフォーマットしてください。
 
 ### LittleFSの場合
 
-設定ファイル（`image-viewer.json`）と表示する画像ファイル（PNG，JPEG，BMP）を`data`ディレクトリに置き，以下のいずれかの方法で実機にアップロードします。
+設定ファイル（`m5nafuda.json`）と表示する画像ファイル（PNG，JPEG，BMP）を`data`ディレクトリに置き，以下のいずれかの方法で実機にアップロードします。
 
 * PlatformIO メニューから「Upload Filesystem Image」を選択する。
 * コマンドラインから`pio run --target uploadfs`を実行する。
 
-このとき，設定ファイル`data/image-viewer.json`も含め，`data`ディレイクトリに置かれているファイルはすべて実機にアップロードされます。
+このとき，設定ファイル`data/m5nafuda.json`も含め，`data`ディレイクトリに置かれているファイルはすべて実機にアップロードされます。
 
 ## 実行方法
 
@@ -124,7 +124,7 @@ IMUが使える場合は，画面の向きに合わせて表示が自動的に�
 ```text
 Image Viewer v1.0.6
 Config:
- /image-viewer.json
+ /m5nafuda.json
  AutoMode: false
  Interval: 3000ms
  Randomized: false
@@ -146,7 +146,7 @@ Image Files:
 ```text
 Image Viewer v1.0.6
 Config:
- /image-viewer.json
+ /m5nafuda.json
  AutoMode: false
  Interval: 3000ms
  Randomized: false
@@ -170,16 +170,16 @@ No image files found
 
 `firmware`ディレクトリに`[機種名]_[名前]_firmware_[バージョン].bin`ファイルが生成されます。
 
-生成されるファームウェアの設定に関しては，`platformio.ini`ファイルの`image-viewer`セクションにある以下の項目を参照してください。
+生成されるファームウェアの設定に関しては，`platformio.ini`ファイルの`m5nafuda`セクションにある以下の項目を参照してください。
 
 * 機種名  
   `custom_firmware_target`  
   各機種を表す文字列が各環境ごとに定義されています。  
   例：M5Stack Basic = m5basic
 * ファームウェアの名前  
-  `custom_firmware_name`（初期値：`image_viewer`）
+  `custom_firmware_name`（初期値：`m5nafuda`）
 * ファームウェアのバージョンが書かれているファイル名  
-  `custom_firmware_version_file` （初期値：`ImageViewer.cpp`）  
+  `custom_firmware_version_file` （初期値：`M5Nafuda.cpp`）  
   ソースコードの書かれている`"vX.Y.Z"`から`X.Y.Z`の値を抽出します。
 * ファームウェアの拡張子（ドットは不要）  
   `custom_firmware_suffix`（初期値：`bin`）

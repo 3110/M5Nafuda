@@ -1,4 +1,4 @@
-#include "ImageViewer.hpp"
+#include "M5Nafuda.hpp"
 
 #if defined(ARDUINO_M5STACK_DIAL) || defined(ARDUINO_M5STACK_DIN_METER)
 #include "M5Encoder.hpp"
@@ -127,28 +127,28 @@ inline int32_t getTextAreaHeight(void) {
 #include <Arduino_JSON.h>
 #include <string.h>
 
-const char* ImageViewer::VERSION = "v1.0.6";
+const char* M5Nafuda::VERSION = "v1.0.0";
 
-const char* ImageViewer::PATH_SEP = "/";
+const char* M5Nafuda::PATH_SEP = "/";
 
-const char* ImageViewer::DEFAULT_CONFIG_NAME = "image-viewer.json";
-const char* ImageViewer::KEY_AUTO_MODE = "AutoMode";
-const char* ImageViewer::KEY_AUTO_MODE_INTERVAL = "AutoModeInterval";
-const char* ImageViewer::KEY_AUTO_MODE_RANDOMIZED = "AutoModeRandomized";
-const char* ImageViewer::KEY_AUTO_ROTATION = "AutoRotation";
-const char* ImageViewer::KEY_ORIENTATION = "Orientation";
+const char* M5Nafuda::DEFAULT_CONFIG_NAME = "m5nafuda.json";
+const char* M5Nafuda::KEY_AUTO_MODE = "AutoMode";
+const char* M5Nafuda::KEY_AUTO_MODE_INTERVAL = "AutoModeInterval";
+const char* M5Nafuda::KEY_AUTO_MODE_RANDOMIZED = "AutoModeRandomized";
+const char* M5Nafuda::KEY_AUTO_ROTATION = "AutoRotation";
+const char* M5Nafuda::KEY_ORIENTATION = "Orientation";
 
-const float ImageViewer::GRAVITY_THRESHOLD = 0.9F;
-const String ImageViewer::ROOT_DIR(ImageViewer::PATH_SEP);
+const float M5Nafuda::GRAVITY_THRESHOLD = 0.9F;
+const String M5Nafuda::ROOT_DIR(M5Nafuda::PATH_SEP);
 
 static const char* EXT_JPG = ".jpg";
 static const char* EXT_JPEG = ".jpeg";
 static const char* EXT_BMP = ".bmp";
 static const char* EXT_PNG = ".png";
 
-ImageViewer::ImageViewer(const String& rootDir, bool isAutoMode,
-                         uint32_t autoModeInterval, bool isAutoModeRandomized,
-                         bool isAutoRotation)
+M5Nafuda::M5Nafuda(const String& rootDir, bool isAutoMode,
+                   uint32_t autoModeInterval, bool isAutoModeRandomized,
+                   bool isAutoRotation)
     : _rootDir(rootDir.endsWith(PATH_SEP) ? rootDir : rootDir + PATH_SEP),
       _orientation(0),
       _isAutoMode(isAutoMode),
@@ -163,10 +163,10 @@ ImageViewer::ImageViewer(const String& rootDir, bool isAutoMode,
     randomSeed(analogRead(0));
 }
 
-ImageViewer::~ImageViewer(void) {
+M5Nafuda::~M5Nafuda(void) {
 }
 
-bool ImageViewer::begin(int bgColor) {
+bool M5Nafuda::begin(int bgColor) {
     M5_BEGIN();
 
     this->_orientation = M5.Lcd.getRotation();
@@ -258,7 +258,7 @@ bool ImageViewer::begin(int bgColor) {
     return true;
 }
 
-bool ImageViewer::update(void) {
+bool M5Nafuda::update(void) {
     M5_UPDATE();
 
     if (this->_isAutoRotation && updateOrientation(GRAVITY_THRESHOLD)) {
@@ -288,7 +288,7 @@ bool ImageViewer::update(void) {
     return direction != 0;
 }
 
-bool ImageViewer::setImageFileList(void) {
+bool M5Nafuda::setImageFileList(void) {
     File root = IV_FS.open(this->_rootDir, "r");
     if (!root and !root.isDirectory()) {
         M5.Lcd.printf("Failed to open \"%s\"", this->_rootDir.c_str());
@@ -317,7 +317,7 @@ bool ImageViewer::setImageFileList(void) {
     return true;
 }
 
-bool ImageViewer::updateOrientation(float threshold) {
+bool M5Nafuda::updateOrientation(float threshold) {
     const uint8_t o = detectOrientation(threshold);
     if (this->_orientation != o) {
         M5_LOGD("Change Orientation: %d -> %d", this->_orientation, o);
@@ -328,7 +328,7 @@ bool ImageViewer::updateOrientation(float threshold) {
     return false;
 }
 
-void ImageViewer::showImage(void) {
+void M5Nafuda::showImage(void) {
     const char* filename = this->_imageFiles[this->_pos].c_str();
     M5.Lcd.startWrite();
     if (isJpeg(filename)) {
@@ -350,7 +350,7 @@ void ImageViewer::showImage(void) {
     M5.Lcd.endWrite();
 }
 
-bool ImageViewer::hasExt(const char* filename, const char* ext) const {
+bool M5Nafuda::hasExt(const char* filename, const char* ext) const {
     if (filename == nullptr) {
         return false;
     }
@@ -361,33 +361,33 @@ bool ImageViewer::hasExt(const char* filename, const char* ext) const {
     return p != nullptr && strcasecmp(ext, p) == 0;
 }
 
-bool ImageViewer::isJpeg(const char* filename) const {
+bool M5Nafuda::isJpeg(const char* filename) const {
     if (filename == nullptr) {
         return false;
     }
     return hasExt(filename, EXT_JPG) || hasExt(filename, EXT_JPEG);
 }
 
-bool ImageViewer::isPng(const char* filename) const {
+bool M5Nafuda::isPng(const char* filename) const {
     if (filename == nullptr) {
         return false;
     }
     return hasExt(filename, EXT_PNG);
 }
 
-bool ImageViewer::isBmp(const char* filename) const {
+bool M5Nafuda::isBmp(const char* filename) const {
     if (filename == nullptr) {
         return false;
     }
     return hasExt(filename, EXT_BMP);
 }
 
-bool ImageViewer::isImageFile(const File& f) const {
+bool M5Nafuda::isImageFile(const File& f) const {
     const char* name = f.name();
     return isJpeg(name) || isPng(name) || isBmp(name);
 }
 
-uint8_t ImageViewer::detectOrientation(float threshold) {
+uint8_t M5Nafuda::detectOrientation(float threshold) {
     if (M5.Imu.isEnabled()) {
         float ax, ay, az;
         M5.Imu.getAccel(&ax, &ay, &az);
@@ -405,7 +405,7 @@ uint8_t ImageViewer::detectOrientation(float threshold) {
     return 0;
 }
 
-bool ImageViewer::parse(const char* config) {
+bool M5Nafuda::parse(const char* config) {
     if (config == nullptr) {
         M5_LOGE("config is null");
         return false;

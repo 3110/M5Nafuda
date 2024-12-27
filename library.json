@@ -1,25 +1,26 @@
 {
-    "name": "ImageViewer",
-    "version": "1.0.6",
-    "description": "Image Viewer for M5Stack Series",
+    "name": "M5Nafuda",
+    "version": "1.0.0",
+    "description": "Digial Nafuda for M5Stack Series",
     "keywords": [
         "M5Stack",
-        "Image Viewer",
+        "Nafuda",
+        "Name Card",
         "M5Unified"
     ],
     "repository": {
         "type": "git",
-        "url": "https://github.com/3110/m5stack-image-viewer.git"
+        "url": "https://github.com/3110/M5Nafuda.git"
     },
     "authors": {
         "name": "SAITO, Tetsuya",
         "email": "tetsuya.saito@gmail.com",
-        "url": "https://scrapbox.io/saitotetsuya"
+        "url": "https://www.notion.so/saitotetsuya/"
     },
     "license": "MIT",
     "dependencies": {
         "Arduino_JSON": "0.2.0",
-        "M5Unified": "0.1.14",
-        "M5GFX": "0.1.15"
+        "M5Unified": "0.2.2",
+        "M5GFX": "0.2.3"
     }
 }

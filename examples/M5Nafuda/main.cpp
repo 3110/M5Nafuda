@@ -1,8 +1,8 @@
 // clang-format off
-#include "ImageViewer.hpp"
+#include "M5Nafuda.hpp"
 // clang-format on
 
-ImageViewer viewer;
+M5Nafuda nafuda;
 
 void forever(void) {
     while (true) {
@@ -11,12 +11,12 @@ void forever(void) {
 }
 
 void setup(void) {
-    if (!viewer.begin()) {
+    if (!nafuda.begin()) {
         forever();
     }
 }
 
 void loop(void) {
-    viewer.update();
+    nafuda.update();
     delay(100);
 }

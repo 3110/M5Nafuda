@@ -47,7 +47,7 @@ inline bool IVS_FS_BEGIN() {
 }
 #endif
 
-class ImageViewer {
+class M5Nafuda {
 public:
     inline const char* getOrientationString(uint8_t rotation) {
         switch (rotation) {
@@ -94,12 +94,12 @@ public:
     static const float GRAVITY_THRESHOLD;
     static const String ROOT_DIR;
 
-    ImageViewer(const String& rootDir = ROOT_DIR,
-                bool isAutoMode = DEFAULT_AUTO_MODE,
-                uint32_t autoModeInterval = DEFAULT_AUTO_MODE_INTERVAL_MS,
-                bool isAutoModeRandomize = DEFAULT_AUTO_MODE_RANDOMIZED,
-                bool isAutoRotation = DEFAULT_AUTO_ROTATION);
-    virtual ~ImageViewer(void);
+    M5Nafuda(const String& rootDir = ROOT_DIR,
+             bool isAutoMode = DEFAULT_AUTO_MODE,
+             uint32_t autoModeInterval = DEFAULT_AUTO_MODE_INTERVAL_MS,
+             bool isAutoModeRandomize = DEFAULT_AUTO_MODE_RANDOMIZED,
+             bool isAutoRotation = DEFAULT_AUTO_ROTATION);
+    virtual ~M5Nafuda(void);
 
     virtual bool begin(const int bgColor = TFT_WHITE);
     virtual bool update(void);

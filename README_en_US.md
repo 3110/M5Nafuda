@@ -1,4 +1,4 @@
-# Image Viewer for M5Stack Series
+# Digital Nafuda for M5Stack Series
 
 This program displays images stored on the LittleFS file system or SD card of the M5Stack series devices one after another.
 
@@ -55,7 +55,7 @@ The default display orientation is different for each model.
 
 ## Configuration File
 
-The following settings can be configured in the `data/image-viewer.json` configuration file:
+The following settings can be configured in the `data/m5nafuda.json` configuration file:
 
 * `AutoMode`  
   Turn auto display mode on (`true`) or off (`false`).
@@ -99,7 +99,7 @@ This configuration file will be uploaded to the device's file system along with 
 
 ### For microSD Card
 
-Place the configuration file (`image-viewer.json`) and the image files you want to display (PNG, JPEG, BMP) in the root directory of the microSD card. Prepare a microSD card with a maximum capacity of 16GB and format it as FAT32.
+Place the configuration file (`m5nafuda.json`) and the image files you want to display (PNG, JPEG, BMP) in the root directory of the microSD card. Prepare a microSD card with a maximum capacity of 16GB and format it as FAT32.
 
 ### For LittleFS
 
@@ -108,7 +108,7 @@ Place image files (PNG, JPEG, BMP) in the `data` directory and upload them to th
 * Select "Upload Filesystem Image" from the PlatformIO menu.  
 * Execute `pio run --target uploadfs` from the command line.
 
-All files placed in the `data` directory, including the `data/image-viewer.json` configuration file, will be uploaded to the device.
+All files placed in the `data` directory, including the `data/m5nafuda.json` configuration file, will be uploaded to the device.
 
 ## How to Run
 
@@ -121,7 +121,7 @@ Upon startup, the following is displayed. If there is no configuration file, the
 ```text
 Image Viewer v1.0.6
 Config:
- /image-viewer.json
+ /m5nafuda.json
  AutoMode: false
  Interval: 3000ms
  Randomized: false
@@ -143,7 +143,7 @@ If no image files are found on the file system, the following message is display
 ```text
 Image Viewer v1.0.6
 Config:
- /image-viewer.json
+ /m5nafuda.json
  AutoMode: false
  Interval: 3000ms
  Randomized: false
@@ -167,7 +167,7 @@ To generate a custom firmware file for distribution, you can use either of the f
 
 A file named `[model_name]_image_viewer_firmware_[version].bin` will be generated in the `firmware` directory.
 
-For settings related to the firmware being generated, please refer to the following items in the `image-viewer` section of the `platformio.ini` file:
+For settings related to the firmware being generated, please refer to the following items in the `m5nafuda` section of the `platformio.ini` file:
 
 * Model name  
   `custom_firmware_target`  
